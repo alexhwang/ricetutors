@@ -1,0 +1,26 @@
+<html>
+<head>
+    
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+
+<script type="text/javascript">
+function find_available() {
+    $.ajax({
+        url: "php/retrieve-availability-data.php?user_id=" + "alex" + "&subject_code=" + "ELEC220",
+        success: function(data) {
+            $("#available-tutors").html(data);
+        }
+    })
+    
+}
+</script>
+</head>
+<body>
+
+I need help in ELEC 220<br>
+
+<div id="available-tutors"></div>
+</body>
+</html>

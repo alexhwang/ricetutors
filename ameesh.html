@@ -1,0 +1,39 @@
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+
+<script type="text/javascript">
+var str_times = "(11/4, 16:00-19:00);(11/5, 18:00-20:00);(11/6, 21:00-22:00)"
+var name = "Alex Yi-Kai Hwang"
+var each_time = str_times.split(";")
+var new_time = ""
+for (var i = 0; i < each_time.length; i++) {
+	each_time[i].split("(");
+	new_time += each_time[i].split("(")[1].split(")")[0] + "; "
+
+}
+
+
+console.log(name +": Available times: " + new_time.slice(0, -2));
+
+var newname = ""
+var str_tutorlist = "Alex,12/1,4;Ameesh,12/2,6;Alex,12/3,6"
+var tutor = str_tutorlist.split(";")
+var tutor_dict = {}
+for (var j = 0; j< tutor.length; j++) {
+	var newname = tutor[j].split(",")[0]
+	var date_and_time = (tutor[j].split(",")[1] + ", " + tutor[j].split(",")[2])
+	if (newname in tutor_dict) {
+		tutor_dict[newname].push(date_and_time)
+	} else {
+		tutor_dict[newname] = [date_and_time]
+	}
+}
+console.log(tutor_dict)
+
+</script>
+</head>
+<body>
+
+</body>
+</html>
