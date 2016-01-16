@@ -4,24 +4,13 @@ function init_tutor() {
     $("#maintext").append("<p>Login with Facebook please!</p><br>");
     $("#maintext").append('<fb:login-button data-size="xlarge" scope="public_profile,email" onlogin="checkLoginState();" id="login_button"></fb:login-button><div id="status"></div>');
     init_fb();
-    /*
-    
-    $("#maintext").append("<p>Make a username please!</p> <input type='text' placeholder='e.g. alexhwang' id='username'><br>");
-    $("#maintext").append("<p>What's your number?</p> <input type='text' placeholder='e.g. 6503878566' id='phone'><br><br>");
-    $("#maintext").append("<button onclick='init_choose_class();'>Next</button>");
-    
-    */
-
 }
 
 function init_choose_class(username) {
-    // var phone = $("#phone").val();
-    
     $("#maintext").html("");
     
     $("#maintext").append("<p>What classes can you help with?</p> <select id='helpselect'><option value='COMP140'>COMP 140</option><option value='ELEC220'>ELEC 220</option></select> <br><br>");
-    //console.log("<button onclick='init_choose_availability(&#34" + username + "&#34,&quot" + phone + "&#34);'>Next</button>");
-    //$("#maintext").append("<button onclick='init_choose_availability(&#34" + username + "&#34,22)'>Next</button>");
+    
     $("#maintext").append("<button onclick='init_choose_availability(" + username + ")'>Next</button>");
     
     $("#maintext").append("<br><br><p>Your indicated availability:</p>");
@@ -39,10 +28,7 @@ function init_choose_availability(username) {
     
     $("#maintext").html("");
     $("#maintext").append("<p>When are you available?</p><br><br>")
-    /*
-    $("#maintext").append('<input type="text" id="datepicker"><input type="text" id="timepicker"><button onclick="add_availability(&#39' 
-                          +username+ '&#39,' +phone+ ');"></button>');
-    */
+
     $("#maintext").append('Choose a date: <input type="text" id="datepicker" value="Click to pick a date"><br>Enter what times you are free: <input type="text" id="timepicker" placeholder="e.g. 3PM-5PM"><br><button onclick="add_availability('+username+',&#39;' +indicated_class+ '&#39;);">Submit Availability</button>');
     
     
@@ -75,9 +61,7 @@ function init_student() {
 function show_results() {
     $.ajax({
         url: "php/retrieve-availability-data.php?subject_code=" + $("#subject").val(),
-        success: function(data) {
-            // data = "10208278613905704,01/26/2016,33;1016953898368330,01/21/2016,4 PM;10208278613905704,01/31/2016,222;10205618860532116,01/29/2016,3PM;1016953898368330,01/05/2016,11 AM;10208278613905704,01/14/2016,2 PM;"
-            
+        success: function(data) {     
             var str_tutorlist = data;
             str_tutorlist = str_tutorlist.slice(0,-1);
             
