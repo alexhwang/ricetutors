@@ -17,9 +17,23 @@ function init_choose_class(username) {
     $.ajax({
         url: "php/retrieve-data-given-user.php?user_id=" + username,
         success: function (data) {
-            $("#maintext").append(data);
+            $("#maintext").append("<table id='availability-table'><tr><td>Course</td><td>Date</td><td>Time</td><td>Remove this timeslot?</td></tr></table>");
+            
+            var str_available = data;
+            str_available = str_available.slice(0,-1);
+            listing = str_available.split(";")
+            for (var r = 0; r< listing.length; r++) {
+                $("#availability-table").append("<tr id=" +r+ "></tr>")
+                $("#" + r).append("<td>"+listing[r].split(",")[0]+"</td>" + "<td>"+listing[r].split(",")[1]+"</td>" + "<td>"+listing[r].split(",")[2]+"</td>" + "<td><a href='#' onclick='javascript:remove_availability(this);'>Remove</a></td>");
+            }
+            
+            
         }
     })   
+}
+
+function remove_availability(obj) {
+    console.log(obj);
 }
 
 function init_choose_availability(username) {
@@ -175,7 +189,7 @@ function welcome() {
     
 	FB.api('/me', function(response) {
         document.getElementById("login_button").innerHTML = "";
-        $("#login_button").append("<img id='fbprof' src='http://graph.facebook.com/" +response.id+ "/picture?type=large'></img><br>"+"Continue as " + response.name + "? ");
+        $("#login_button").append("<img id='fbprof' src='http://graph.facebook.com/" +response.id+ "/picture?type=large'></img><br><br>"+"Continue as " + response.name + "? ");
         $("#login_button").append("<button onclick='init_choose_class(" +response.id+ ")'>Continue</button>");
         
 		console.log('Successful login for: ' + response.name);

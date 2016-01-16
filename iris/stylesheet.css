@@ -1,6 +1,8 @@
 
 body {
-    color:#303030
+    color:#303030;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+        
 }
 
 img {
@@ -8,6 +10,11 @@ img {
 	height: 120px;
 	width: 300px;
 	margin: auto;
+}
+
+table {
+    width: 50%;
+    margin: auto;
 }
 
 #fbprof {
