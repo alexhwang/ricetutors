@@ -17,6 +17,10 @@ table {
     margin: auto;
 }
 
+#resultstable {
+    width: 300px;
+}
+
 #fbprof {
     display: inline;
     height: 100px;
@@ -26,6 +30,8 @@ table {
 .fbsmall {
     height: 50px;
     width: 50px;
+    
+    display: inline-block;
 }
 
 p {
@@ -53,6 +59,10 @@ a {
 	font-weight: bold;
 	font-size: 25px;
 	color: #ffffff;
+}
+
+.remove-link {
+    color: dodgerblue;
 }
 
 span {

@@ -1,0 +1,55 @@
+.authorprd{
+	color: #303030;
+	border-radius: 20px;
+	width: 380px;
+	height:160px;
+	border: 3px solid #094978;
+	background: #dde7ee;
+	padding: 15px;
+	margin: 80px;
+	position: relative;
+	top: -60px;
+	left: -70px;
+	box-shadow: 3px 3px 5px #888888;
+}
+
+.authorprd .authprpic img{
+	width:110px;
+	border:3px solid #ccc;
+	border-radius:50%;
+}
+.authorprd .authprpic, .authorprd .authprbio{
+	float: left;
+}
+.authorprd .authprbio{
+	margin:10px 25px;
+}
+.authorprd .authprbio h2{
+	margin:0px 0px;
+}
+.authorprd .authprbio p{
+	margin: 2px;
+}
+
+p {
+    font-family: 'Raleway', sans-serif;
+    font-size: 14px;
+    margin-top: 0px;    
+}
+
+li {
+    font-family: 'Raleway', sans-serif;
+    font-size: 12px
+}
+
+p + ul {
+    margin-top: -0px;
+}
+
+h2 {
+    font-family: 'Raleway', sans-serif;
+}
+
+/* References:
+http://codoat.blogspot.in/2015/08/business-card-style-author-box-with.html
+/*

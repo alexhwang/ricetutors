@@ -6,6 +6,7 @@
 </head>
 <body>
 <link type="text/css" rel="stylesheet" href="iris/stylesheet.css" />
+<!-- <link type="text/css" rel="stylesheet" href="iris/tutor_results_stylesheet.css" /> -->
 <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
@@ -14,7 +15,7 @@
     
 <br>
 <br>
-<img src="http://center.richardtapia.net/wp-content/uploads/sites/2/2014/03/rice.png"/>
+<a href="."><img src="http://center.richardtapia.net/wp-content/uploads/sites/2/2014/03/rice.png"/></a>
 
 
 <!-- <div> <a href="http://samplepage.com/">
