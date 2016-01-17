@@ -21,14 +21,18 @@ function init_choose_class(username) {
     $.ajax({
         url: "php/retrieve-data-given-user.php?user_id=" + username,
         success: function (data) {
-            $("#maintext").append("<table id='availability-table'><tr><td>Course</td><td>Date</td><td>Time</td></tr></table>");
-            
-            var str_available = data;
-            str_available = str_available.slice(0,-1);
-            listing = str_available.split(";")
-            for (var r = 0; r < listing.length; r++) {
-                $("#availability-table").append("<tr id=" +r+ "></tr>")
-                $("#" + r).append("<td>"+listing[r].split(",")[0]+"</td>" + "<td>"+listing[r].split(",")[1]+"</td>" + "<td>"+listing[r].split(",")[2]+"</td>" + "<td><a href='#' id=" +listing[r].split(",")[3]+ " class='remove-link' onclick='javascript:remove_availability(" +listing[r].split(",")[3]+ ",&#34;" +username+ "&#34;);'>Remove</a></td>");
+            if (data != "") {
+                $("#maintext").append("<table id='availability-table'><tr><td>Course</td><td>Date</td><td>Time</td></tr></table>");
+                var str_available = data;
+                str_available = str_available.slice(0,-1);
+                listing = str_available.split(";")
+                for (var r = 0; r < listing.length; r++) {
+                    $("#availability-table").append("<tr id=" +r+ "></tr>")
+                    $("#" + r).append("<td>"+listing[r].split(",")[0]+"</td>" + "<td>"+listing[r].split(",")[1]+"</td>" + "<td>"+listing[r].split(",")[2]+"</td>" + "<td><a href='#' id=" +listing[r].split(",")[3]+ " class='remove-link' onclick='javascript:remove_availability(" +listing[r].split(",")[3]+ ",&#34;" +username+ "&#34;);'>Remove</a></td>");
+                }
+            }
+            else {
+                $("#maintext").append("No previously recorded availability.");
             }
             
         }
