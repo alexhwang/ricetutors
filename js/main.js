@@ -1,3 +1,7 @@
+$(document).ready(function() {
+    $("body").show("fade", 2000);
+});
+
 function init_tutor() {
     $("#maintext").html("");
     
@@ -9,9 +13,9 @@ function init_tutor() {
 function init_choose_class(username) {
     $("#maintext").html("");
     
-    $("#maintext").append("<p>What classes can you help with?</p> <select id='helpselect'><option value='COMP140'>COMP 140</option><option value='ELEC220'>ELEC 220</option></select> <br><br>");
+    $("#maintext").append("<p>What classes can you help with?</p><select id='helpselect'><option value='COMP140'>COMP 140</option><option value='ELEC220'>ELEC 220</option><option value='PHYS101'>PHYS 101</option><option value='MATH211'>MATH 211</option><option value='CHEM121'>CHEM 121</option></select> <br><br>");
     
-    $("#maintext").append("<button onclick='init_choose_availability(" + username + ")'>Next</button>");
+    $("#maintext").append("<button class='button' onclick='init_choose_availability(" + username + ")'>Next</button>");
     
     $("#maintext").append("<br><br><p>Your previously indicated availability:</p>");
     $.ajax({
@@ -22,7 +26,7 @@ function init_choose_class(username) {
             var str_available = data;
             str_available = str_available.slice(0,-1);
             listing = str_available.split(";")
-            for (var r = 0; r< listing.length; r++) {
+            for (var r = 0; r < listing.length; r++) {
                 $("#availability-table").append("<tr id=" +r+ "></tr>")
                 $("#" + r).append("<td>"+listing[r].split(",")[0]+"</td>" + "<td>"+listing[r].split(",")[1]+"</td>" + "<td>"+listing[r].split(",")[2]+"</td>" + "<td><a href='#' id=" +listing[r].split(",")[3]+ " class='remove-link' onclick='javascript:remove_availability(" +listing[r].split(",")[3]+ ",&#34;" +username+ "&#34;);'>Remove</a></td>");
             }
@@ -42,12 +46,11 @@ function remove_availability(unique_id, username) {
 
 function init_choose_availability(username) {
     var indicated_class = $("#helpselect").val();
-    console.log(indicated_class);
     
     $("#maintext").html("");
     $("#maintext").append("<p>When are you available?</p><br><br>")
 
-    $("#maintext").append('Choose a date: <input type="text" id="datepicker" value="Click to pick a date"><br>Enter what times you are free: <input type="text" id="timepicker" placeholder="e.g. 3PM-5PM"><br><button onclick="add_availability('+username+',&#39;' +indicated_class+ '&#39;);">Submit Availability</button>');
+    $("#maintext").append('I can help on <input type="text" id="datepicker" value="Click to pick a date"><br>I can help from <input type="text" id="timepicker1" placeholder="e.g. 3PM"> to <input type="text" id="timepicker2" placeholder="e.g. 5PM"><br><br><button class ="button" onclick="add_availability('+username+',&#39;' +indicated_class+ '&#39;);">Submit Availability</button>');
     
     
     $("#datepicker").datepicker();
@@ -55,13 +58,16 @@ function init_choose_availability(username) {
 
 function add_availability(username, indicated_class) {
     var date = $("#datepicker").val();
-    var time = $("#timepicker").val();
+    var time1 = $("#timepicker1").val();
+    var time2 = $("#timepicker2").val();
     
     $.ajax({
-        url: "php/add-availability-data.php?user_id=" + username + "&" + "subject_code=" + indicated_class + "&date_available=" + date + "&timeslot_available=" + time,
+        url: "php/add-availability-data.php?user_id=" + username + "&" + "subject_code=" + indicated_class + "&date_available=" + date + "&timeslot_available=" + time1 + "-" + time2,
         success: function (data) {
             if (data = "success") {
-                $("#maintext").html("Success! Thanks!")
+                $("#status").css("display", "none");
+                $("#status").html("<br>Added " + indicated_class + " on " + date + " from " + time1 + "-" + time2 + ". Submit another one!");
+                $("#status").show("fade");
             }
         }
     });
@@ -72,14 +78,17 @@ function add_availability(username, indicated_class) {
 function init_student() {
     $("#maintext").html("");
     
-    $("#maintext").append("<p>What do you need help with?</p> <select id='subject'><option value='COMP140'>COMP 140</option><option value='ELEC220'>ELEC 220</option></select><br><br>");
-    $("#maintext").append("<button onclick='show_results();'>Get Help!</button><div id='results'></div>");
+    $("#maintext").append("<p>What do you need help with?</p><select id='subject'><option value='COMP140'>COMP 140</option><option value='ELEC220'>ELEC 220</option><option value='PHYS101'>PHYS 101</option><option value='MATH211'>MATH 211</option><option value='CHEM121'>CHEM 121</option></select><br><br>");
+    $("#maintext").append("<button class='button' onclick='show_results();'>Get Help!</button><div id='results'></div>");
 }
 
 function show_results() {
     $.ajax({
         url: "php/retrieve-availability-data.php?subject_code=" + $("#subject").val(),
-        success: function(data) {     
+        success: function(data) {
+            
+            
+            
             var str_tutorlist = data;
             str_tutorlist = str_tutorlist.slice(0,-1);
             
@@ -94,14 +103,16 @@ function show_results() {
                     tutor_dict[newname] = [date_and_time];
                 }
             }
-            console.log(tutor_dict);
+            
             
             $("#results").html("");
-            $("#results").append("<table id='resultstable'></table>")
+            $("#results").append("<br><table id='resultstable'></table>")
+            
+            
             
             for (var key in tutor_dict) {
                 $("#resultstable").append("<tr id='" +key+ "'></tr>");
-                var largestr = "<td><a href='http://facebook.com/" +key+ "'><img class='fbsmall' src='http://graph.facebook.com/" +key+"/picture'></img></a></td><td>";
+                var largestr = "<td><a href='http://facebook.com/" +key+ "'><img class='fbsmall' src='http://graph.facebook.com/" +key+"/picture'></img></a></td><td id='user-" +key+ "'></td><td>";
                 
                 for (var i=0; i<tutor_dict[key].length; i++) {
                     largestr += tutor_dict[key][i] + "<br>";
@@ -110,6 +121,11 @@ function show_results() {
                 largestr += "</td>";
                 
                 $("#" + key).append(largestr);
+                populate_name(key);
+            }
+            
+            if (data == "") {
+                $("#results").html("<br>Sorry, no results found.");
             }
                 
                 
@@ -117,6 +133,14 @@ function show_results() {
     })
 }
 
+function populate_name(user) {
+    $.ajax({
+        url: "php/retrieve-name.php?user=" + user,
+        success: function(data) {
+            $("#user-"+user).html(data);
+        }
+    });
+}
 
 
 // ================================
@@ -198,20 +222,13 @@ function init_fb() {
 
 
 function welcome() {
-	console.log('Welcome!  Fetching your information.... ');
-    
-    
 	FB.api('/me', function(response) {
         document.getElementById("login_button").innerHTML = "";
         $("#login_button").append("<img id='fbprof' src='http://graph.facebook.com/" +response.id+ "/picture?type=large'></img><br><br>"+"Continue as " + response.name + "? ");
-        $("#login_button").append("<button onclick='init_choose_class(" +response.id+ ")'>Continue</button>");
+        $("#login_button").append("<br><br><button class='button' onclick='init_choose_class(" +response.id+ ")'>Continue</button>");
+        check_user_in_database(response.id, response.name);
         
-		console.log('Successful login for: ' + response.name);
-        // init_choose_class(response.id);
-		/* document.getElementById('status').innerHTML =
-			'Welcome, ' + response.name + '! ' + response.id; */
         
-        // check_user_in_database(response.id);
 	});    
 }
 
@@ -219,12 +236,12 @@ function welcome() {
 
 
 
-function check_user_in_database(id) {
+function check_user_in_database(id, name) {
     $.ajax({
         url: "php/is-unique-user.php?user_id=" + id,
         success: function (data) {
             if (data == "True") {
-                create_new_user(id);
+                create_new_user(id, name);
             }
             else {
                 // handle a returning user
@@ -233,11 +250,11 @@ function check_user_in_database(id) {
     });
 }
 
-function create_new_user(id) {
+function create_new_user(id, name) {
     $.ajax({
-        url: "php/create-new-user.php?user_id=" + id,
+        url: "php/create-new-user.php?user_id=" + id + "&name=" + name,
         success: function (data) {
-            console.log(data);
+            console.log("Created new user: " + data);
         }
     });
 }

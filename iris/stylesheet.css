@@ -1,5 +1,6 @@
 
 body {
+    display:none;
     color:#303030;
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
         
@@ -18,7 +19,7 @@ table {
 }
 
 #resultstable {
-    width: 300px;
+    width: 400px;
 }
 
 #fbprof {
@@ -43,6 +44,7 @@ p {
 span#welcome {
     font-size: 50px
 }
+
 </* div {
 	border-radius: 5px;
 	border: 2px solid #6495ED;

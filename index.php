@@ -32,6 +32,8 @@
         <br>
         <button class="button" onclick="init_student();"> Student </button>
     </div>
+    
+    <div id="status"></div>
 </div>
 
     
