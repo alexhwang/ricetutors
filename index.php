@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Rice Tutors</title>
+<title>Tutors @ Rice</title>
 <meta charset="UTF-8">
 </head>
 <body>
@@ -15,6 +15,8 @@
     
 <br>
 <br>
+<p style='font-size:72px;margin:10px'>Tutors @</p>
+    
 <a href="."><img src="http://center.richardtapia.net/wp-content/uploads/sites/2/2014/03/rice.png"/></a>
 
 

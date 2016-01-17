@@ -50,7 +50,7 @@ function init_choose_availability(username) {
     $("#maintext").html("");
     $("#maintext").append("<p>When are you available?</p><br><br>")
 
-    $("#maintext").append('I can help on <input type="text" id="datepicker" value="Click to pick a date"><br>I can help from <input type="text" id="timepicker1" placeholder="e.g. 3PM"> to <input type="text" id="timepicker2" placeholder="e.g. 5PM"><br><br><button class ="button" onclick="add_availability('+username+',&#39;' +indicated_class+ '&#39;);">Submit Availability</button>');
+    $("#maintext").append('I can help on <input type="text" id="datepicker" placeholder="Click to pick a date"><br>I can help from <input type="text" id="timepicker1" placeholder="e.g. 3PM"> to <input type="text" id="timepicker2" placeholder="e.g. 5PM"><br><br><button class ="button" onclick="add_availability('+username+',&#39;' +indicated_class+ '&#39;);">Submit Availability</button>');
     
     
     $("#datepicker").datepicker();
@@ -106,7 +106,7 @@ function show_results() {
             
             
             $("#results").html("");
-            $("#results").append("<br><table id='resultstable'></table>")
+            $("#results").append("<br><p>These people can help you:</p><table id='resultstable'></table>")
             
             
             
