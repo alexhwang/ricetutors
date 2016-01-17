@@ -13,7 +13,7 @@ function init_choose_class(username) {
     
     $("#maintext").append("<button onclick='init_choose_availability(" + username + ")'>Next</button>");
     
-    $("#maintext").append("<br><br><p>Your indicated availability:</p>");
+    $("#maintext").append("<br><br><p>Your previously indicated availability:</p>");
     $.ajax({
         url: "php/retrieve-data-given-user.php?user_id=" + username,
         success: function (data) {
